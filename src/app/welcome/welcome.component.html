@@ -1,0 +1,54 @@
+<div class="container">
+  <mat-card style="width: 1000px">
+    <h1>Welcome to Quiz App!</h1>
+    <p>This is Angular and TypeScript quiz. Please read rules.</p>
+    <mat-divider></mat-divider>
+
+    <mat-accordion>
+      <mat-expansion-panel
+        style="margin-top: 50px; margin-bottom: 20px; background-color: #7d23a3"
+        (opened)="panelOpenState = true"
+        (closed)="panelOpenState = false"
+      >
+        <mat-expansion-panel-header style="background-color: #9c29ce">
+          <mat-panel-title style="justify-content: center">
+            {{ panelOpenState ? "Close" : "Open" }} rules
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <mat-list role="list">
+          <mat-list-item role="listitem">
+            <li>Correct Question gives you 10 points</li>
+          </mat-list-item>
+          <mat-list-item role="listitem">
+            <li>Incorrect question gives -10 points</li>
+          </mat-list-item>
+          <mat-list-item role="listitem">
+            <li>You will have 60 sec to answer each question</li>
+          </mat-list-item>
+          <mat-list-item role="listitem">
+            <li>Refreshing the page will reset the Quiz</li>
+          </mat-list-item>
+        </mat-list>
+      </mat-expansion-panel>
+    </mat-accordion>
+
+    <h1 style="text-align: center">Enter your name and start the quiz!</h1>
+
+    <div class="welcome_form">
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Enter your name</mat-label>
+        <input #name matInput />
+      </mat-form-field>
+
+      <button
+        mat-raised-button
+        color="accent"
+        routerLink="/question"
+        (click)="startQuiz()"
+      >
+        Start the Quiz!
+      </button>
+    </div>
+  </mat-card>
+</div>

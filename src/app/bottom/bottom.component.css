@@ -1,0 +1,11 @@
+.bottom_sheet {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.bottom_chip {
+  cursor: pointer;
+  background-color: #9c29ce !important;
+}

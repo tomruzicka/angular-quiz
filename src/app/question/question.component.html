@@ -1,0 +1,101 @@
+<div class="container">
+  <mat-card style="width: 1000px">
+    <ng-container *ngIf="!isQuizCompleted">
+      <div class="question_flex">
+        <img
+          src="https://upload.wikimedia.org/wikipedia/commons/c/cf/Angular_full_color_logo.svg"
+          alt=""
+          width="180px"
+        />
+
+        <div class="question_flex_right">
+          <h1>Welcome {{ name }}!</h1>
+          <span>Good luck and have fun!</span>
+        </div>
+      </div>
+
+      <div class="question_flex">
+        <div class="score">
+          <span>{{ points }} points</span>
+        </div>
+
+        <div class="question-remain">
+          <span
+            >Question {{ currentQuestion + 1 }} of
+            {{ questionList.length }}</span
+          >
+        </div>
+
+        <div class="timer">
+          <mat-icon>timelapse</mat-icon>
+          <span>{{ counter }} sec</span>
+        </div>
+      </div>
+
+      <mat-progress-bar
+        class="example-margin"
+        [color]="color"
+        [mode]="mode"
+        [value]="progress"
+      >
+      </mat-progress-bar>
+
+      <div class="question">
+        <h1>{{ questionList[currentQuestion]?.questionText }}</h1>
+      </div>
+
+      <div class="options">
+        <ol *ngFor="let option of questionList[currentQuestion]?.options">
+          <li (click)="answer(currentQuestion + 1, option)">
+            <mat-card
+              appChangeBg
+              [isCorrect]="option.correct"
+              class="answers_card"
+              >{{ option.text }}</mat-card
+            >
+          </li>
+        </ol>
+      </div>
+
+      <div class="controls_flex">
+        <button
+          [disabled]="currentQuestion === 0"
+          mat-fab
+          color="primary"
+          (click)="previousQuestion()"
+        >
+          <mat-icon>chevron_left</mat-icon>
+        </button>
+
+        <button mat-fab color="primary" (click)="resetQuiz()">
+          <mat-icon>refresh</mat-icon>
+        </button>
+
+        <button
+          [disabled]="currentQuestion === questionList.length - 1"
+          mat-fab
+          color="primary"
+          (click)="nextQuestion()"
+        >
+          <mat-icon>chevron_right</mat-icon>
+        </button>
+      </div>
+    </ng-container>
+
+    <ng-container *ngIf="isQuizCompleted">
+      <div class="result">
+        <h1>Congratulations {{ name }}!</h1>
+        <h2>You have completed the quiz.</h2>
+
+        <p>Total Question Attempted: {{ questionList.length }}</p>
+        <p>Total Correct Answered: {{ correctAnswer }}</p>
+        <p>Total Wrong Answered: {{ incorrectAnswer }}</p>
+        <p>Your Score: {{ points }} Points</p>
+
+        <button mat-raised-button color="accent" routerLink="/welcome">
+          Try Again!
+        </button>
+      </div>
+    </ng-container>
+  </mat-card>
+</div>
